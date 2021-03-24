@@ -75,9 +75,23 @@ void timer(const int step)
 {
     if (!is_paused)
     {
-        for (auto& item : move_queue)
+        for (auto it = move_queue.begin(); it != move_queue.end();)
         {
-            item->move();
+            auto* dynamic_obj = *it;
+            if (dynamic_obj->move())
+            {
+                ++it;
+            }
+            else
+            {
+                it = move_queue.erase(it);
+
+                if (auto* displayable = dynamic_cast<Displayable*>(dynamic_obj))
+                {
+                    display_queue.erase(std::find(display_queue.begin(), display_queue.end(), displayable));
+                }
+                delete dynamic_obj;
+            }            
         }
     }
 
