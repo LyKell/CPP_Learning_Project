@@ -86,7 +86,7 @@ void timer(const int step)
             {
                 it = move_queue.erase(it);
                 delete dynamic_obj;
-            }            
+            }
         }
     }
 
