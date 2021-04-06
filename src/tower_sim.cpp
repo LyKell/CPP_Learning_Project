@@ -30,12 +30,12 @@ TowerSimulation::~TowerSimulation()
     delete airport;
 }
 
-std::unique_ptr<Aircraft> TowerSimulation::create_aircraft(const AircraftType& type) const
+std::unique_ptr<Aircraft> TowerSimulation::create_aircraft(const AircraftType& type)
 {
     return aircraft_factory.create_aircraft(type, airport);
 }
 
-std::unique_ptr<Aircraft> TowerSimulation::create_random_aircraft() const
+std::unique_ptr<Aircraft> TowerSimulation::create_random_aircraft()
 {
     return aircraft_factory.create_random_aircraft(airport);
 }

@@ -20,8 +20,8 @@ private:
     TowerSimulation(const TowerSimulation&) = delete;
     TowerSimulation& operator=(const TowerSimulation&) = delete;
 
-    [[nodiscard]] std::unique_ptr<Aircraft> create_aircraft(const AircraftType& type) const;
-    [[nodiscard]] std::unique_ptr<Aircraft> create_random_aircraft() const;
+    [[nodiscard]] std::unique_ptr<Aircraft> create_aircraft(const AircraftType& type);
+    [[nodiscard]] std::unique_ptr<Aircraft> create_random_aircraft();
 
     void create_keystrokes();
     void display_help() const;
