@@ -51,6 +51,15 @@ void TowerSimulation::create_keystrokes()
     GL::keystrokes.emplace('z', []() { GL::ticks_per_sec = std::max(GL::ticks_per_sec - 1u, 1u); });
     GL::keystrokes.emplace('a', []() { GL::ticks_per_sec = std::min(GL::ticks_per_sec + 1u, 180u); });
     GL::keystrokes.emplace('p', []() { GL::is_paused = !GL::is_paused; });
+
+    const auto& airlines = aircraft_factory.airlines;
+
+    for (size_t i = 0; i < airlines.size(); ++i)
+    {
+        GL::keystrokes.emplace('0' + i, [airlines, this, i]() {
+            std::cout << "Airline " << airlines[i] << ": " << aircraft_manager.count_aircraft_per_airline(airlines[i]) << std::endl;
+        });
+    }
 }
 
 void TowerSimulation::display_help() const

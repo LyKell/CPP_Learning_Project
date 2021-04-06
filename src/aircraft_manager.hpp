@@ -14,4 +14,5 @@ private:
 public:
     void add(std::unique_ptr<Aircraft> aircraft);
     bool move();
+    int count_aircraft_per_airline(const std::string&) const;
 };

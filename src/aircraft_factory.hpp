@@ -5,6 +5,7 @@
 
 #include <set>
 #include <string>
+#include <vector>
 
 constexpr size_t NUM_AIRCRAFT_TYPES = 3;
 
@@ -18,7 +19,7 @@ private:
 
 public:
     AircraftType* aircraft_types[NUM_AIRCRAFT_TYPES] {};
-    const std::string airlines[8] = { "AF", "LH", "EY", "DL", "KL", "BA", "AY", "EY" };
+    const std::vector<std::string> airlines = { "AF", "LH", "EY", "DL", "KL", "BA", "AY", "EY" };
 
     void init_aircraft_types();
     [[nodiscard]] std::unique_ptr<Aircraft> create_aircraft(const AircraftType& type, Airport* airport);
