@@ -209,5 +209,8 @@ void Aircraft::refill(int& fuel_stock)
     fuel += to_refill;
     fuel_stock -= to_refill;
 
-    std::cout << flight_number << " got refilled with " << to_refill << "L" << std::endl;
+    if (to_refill != 0)
+    {
+        std::cout << flight_number << " got refilled with " << to_refill << "L" << std::endl;
+    }
 }

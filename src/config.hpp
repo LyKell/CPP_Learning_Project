@@ -32,5 +32,7 @@ constexpr size_t DEFAULT_WINDOW_HEIGHT = 600;
 constexpr int INIT_MAX_FUEL = 3000;
 constexpr int INIT_MIN_FUEL = 150;
 constexpr int MIN_FUEL = 200;
+constexpr int MAX_KEROZEN = 5000;
+constexpr int DEFAULT_REFILL_TIME = 100;
 
 using AircraftCrash = std::runtime_error;
