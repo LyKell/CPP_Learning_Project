@@ -70,7 +70,10 @@ public:
 
     bool has_terminal() const;
     bool is_circling() const;
+    
     int get_fuel() const { return fuel; }
+
+    bool is_low_on_fuel() const;
 
     friend class Tower;
 };
