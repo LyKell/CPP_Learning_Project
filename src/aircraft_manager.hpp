@@ -16,4 +16,5 @@ public:
     bool move();
     int count_aircraft_per_airline(const std::string&) const;
     bool compare_two_aircrafts(std::unique_ptr<Aircraft>&, std::unique_ptr<Aircraft>&);
+    int get_required_fuel();
 };

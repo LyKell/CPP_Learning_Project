@@ -186,3 +186,8 @@ bool Aircraft::is_low_on_fuel() const
 {
     return fuel <= MIN_FUEL;
 }
+
+bool Aircraft::has_left_airport() const
+{
+    return has_landed && !is_on_ground();
+}

@@ -74,6 +74,7 @@ public:
     int get_fuel() const { return fuel; }
 
     bool is_low_on_fuel() const;
+    bool has_left_airport() const;
 
     friend class Tower;
 };

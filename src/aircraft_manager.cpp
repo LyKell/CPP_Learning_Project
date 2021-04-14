@@ -37,3 +37,16 @@ bool AircraftManager::compare_two_aircrafts(std::unique_ptr<Aircraft>& a1, std::
     return std::make_tuple(a1->has_terminal(), a1->get_fuel())
         < std::make_tuple(a2->has_terminal(), a2->get_fuel());
 }
+
+int AircraftManager::get_required_fuel()
+{
+    return std::accumulate(aircrafts.begin(), aircrafts.end(), 0,
+        [](int sum, std::unique_ptr<Aircraft>& a)
+        {
+            if (a->is_low_on_fuel() && !a->has_left_airport())
+            {
+                return sum + (INIT_MAX_FUEL - a->get_fuel());
+            }
+            return sum;
+        });
+}
