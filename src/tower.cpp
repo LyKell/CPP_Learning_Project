@@ -49,7 +49,7 @@ WaypointQueue Tower::get_instructions(Aircraft& aircraft)
     }
 }
 
-void Tower::arrived_at_terminal(const Aircraft& aircraft)
+void Tower::arrived_at_terminal(Aircraft& aircraft)
 {
     const auto it = reserved_terminals.find(&aircraft);
     assert(it != reserved_terminals.end());
