@@ -15,4 +15,5 @@ public:
     void add(std::unique_ptr<Aircraft> aircraft);
     bool move();
     int count_aircraft_per_airline(const std::string&) const;
+    bool compare_two_aircrafts(std::unique_ptr<Aircraft>&, std::unique_ptr<Aircraft>&);
 };
