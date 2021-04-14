@@ -68,6 +68,7 @@ void Aircraft::operate_landing_gear()
         {
             std::cout << flight_number << " is now landing..." << std::endl;
             landing_gear_deployed = true;
+            has_landed = true;
         }
         else if (!ground_before && !ground_after)
         {
@@ -98,6 +99,15 @@ bool Aircraft::move()
         }
         
         waypoints = control.get_instructions(*this);
+    }
+
+    if (is_circling())
+    {
+        auto path = control.reserve_terminal(*this);
+        if (!path.empty())
+        {
+            waypoints = std::move(path);
+        }
     }
 
     if (!is_at_terminal)
@@ -143,6 +153,7 @@ bool Aircraft::move()
             {
                 pos.z() -= SINK_FACTOR * (SPEED_THRESHOLD - speed_len);
             }
+            
         }
 
         // update the z-value of the displayable structure
@@ -154,4 +165,19 @@ bool Aircraft::move()
 void Aircraft::display() const
 {
     type.texture.draw(project_2D(pos), { PLANE_TEXTURE_DIM, PLANE_TEXTURE_DIM }, get_speed_octant());
+}
+
+
+bool Aircraft::has_terminal() const
+{
+    if (!waypoints.empty())
+    {
+        return waypoints.back().type == WaypointType::wp_terminal;
+    }
+    return false;
+}
+
+bool Aircraft::is_circling() const
+{
+    return !has_terminal() && !has_landed;
 }
