@@ -191,3 +191,23 @@ bool Aircraft::has_left_airport() const
 {
     return has_landed && !is_on_ground();
 }
+
+void Aircraft::refill(int& fuel_stock)
+{
+    auto needed_fuel = INIT_MAX_FUEL - fuel;
+    int to_refill;
+
+    if (fuel_stock > needed_fuel)
+    {
+        to_refill = needed_fuel;
+    }
+    else
+    {
+        to_refill = fuel_stock;
+    }
+
+    fuel += to_refill;
+    fuel_stock -= to_refill;
+
+    std::cout << flight_number << " got refilled with " << to_refill << "L" << std::endl;
+}
