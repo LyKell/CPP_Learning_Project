@@ -7,6 +7,7 @@
 #include <iostream>
 #include <numeric>
 #include <string>
+#include <utility>
 
 template <int dimension, typename Type>
 class Point
@@ -16,17 +17,24 @@ public:
     
     Point() = default;
 
-    Point(float x, float y) :
-        values { x, y }
-    {
-        static_assert(dimension == 2, "Point2D must have 2 values in order to be created");
-    }
+    // Point(float x, float y) :
+    //     values { x, y }
+    // {
+    //     static_assert(dimension == 2, "Point2D must have 2 values in order to be created");
+    // }
 
-    Point(float x, float y, float z) :
-        values { x, y, z }
+    // Point(float x, float y, float z) :
+    //     values { x, y, z }
+    // {
+    //     static_assert(dimension == 3, "Point3D must have 3 values in order to be created");
+    // }
+
+    template <typename... T>
+    Point(Type first, T... Values) :
+        values { first, std::forward<T>(Values)... }
     {
-        static_assert(dimension == 3, "Point3D must have 3 values in order to be created");
-    }
+        static_assert(sizeof...(T) == dimension - 1, "Invalid number of arguments passed to the constructor Point::Point");
+    };
 
     Type& x() { return values[0]; }
     Type x() const { return values[0]; }
@@ -181,14 +189,10 @@ inline Point2D project_2D(const Point3D& p)
 
 inline void test_generic_points()
 {
-    Point<2, float> p1;
-    Point<2, float> p2;
-
-    Point2D p2d {1, 2};
-    Point3D p3d {1, 2, 3};
-    auto p3 = p1 + p2;
-    p1 += p2;
-    p1 *= 3.f;
+    Point<2, float> p2d {1.f, 2.f};
+    Point<3, float> p3d1 {1.f, 2.f, 3.f};
+    Point<3, float> p3d2 {5.f, -3.f, -4.f};
+    auto p3 = p3d1 + p3d2;
 
     std::cout << p3 << std::endl;
 }
