@@ -6,6 +6,7 @@
 #include <cmath>
 #include <iostream>
 #include <numeric>
+#include <string>
 
 struct Point2D
 {
@@ -161,6 +162,15 @@ struct Point3D
         }
 
         return *this;
+    }
+
+    std::string to_string()
+    {
+        return "(" + std::accumulate(values.begin() + 1, values.end(), std::to_string(values[0]),
+            [](std::string v1, float v2)
+            {
+                return std::move(v1) + ", " + std::to_string(v2);
+            }) + ")";
     }
 };
 

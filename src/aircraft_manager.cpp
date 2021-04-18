@@ -1,10 +1,11 @@
 #include "aircraft_manager.hpp"
+#include "aircraft_crash.hpp"
 
 #include <algorithm>
+#include <iostream>
 #include <memory>
 #include <utility>
 
-#include <iostream>
 
 void AircraftManager::add(std::unique_ptr<Aircraft> aircraft)
 {
@@ -68,5 +69,5 @@ int AircraftManager::get_required_fuel()
 
 void AircraftManager::count_crash() const
 {
-    std::cout << aircraft_crash << " airplanes crashed into the ground" << std::endl;
+    std::cerr << aircraft_crash << " airplanes crashed into the ground" << std::endl;
 }
