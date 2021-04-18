@@ -140,7 +140,6 @@ bool Aircraft::move()
         }
         else
         {
-            // if we are in the air, but too slow, then we will sink!
             fuel--;
             if (fuel <= 0)
             {
@@ -148,6 +147,7 @@ bool Aircraft::move()
                 throw AircraftCrash { flight_number + " is out of fuel"s };
             }
 
+            // if we are in the air, but too slow, then we will sink!
             const float speed_len = speed.length();
             if (speed_len < SPEED_THRESHOLD)
             {

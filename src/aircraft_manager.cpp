@@ -20,7 +20,19 @@ bool AircraftManager::move()
             return compare_two_aircrafts(a1, a2);
         });
 
-    aircrafts.erase(std::remove_if(aircrafts.begin(), aircrafts.end(), [](std::unique_ptr<Aircraft>& a) { return !(a->move()); }), aircrafts.end());
+    aircrafts.erase(std::remove_if(aircrafts.begin(), aircrafts.end(),
+        [](std::unique_ptr<Aircraft>& a)
+        {
+            try 
+            {
+                return !(a->move());
+            }
+            catch (const AircraftCrash& err)
+            {
+                std::cerr << err.what() << std::endl;
+                return true;
+            }
+        }), aircrafts.end());
     return true;
 }
 
