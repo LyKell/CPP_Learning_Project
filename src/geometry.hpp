@@ -18,11 +18,15 @@ public:
 
     Point(float x, float y) :
         values { x, y }
-    {}
+    {
+        static_assert(dimension == 2, "Point2D must have 2 values in order to be created");
+    }
 
     Point(float x, float y, float z) :
         values { x, y, z }
-    {}
+    {
+        static_assert(dimension == 3, "Point3D must have 3 values in order to be created");
+    }
 
     Type& x() { return values[0]; }
     Type x() const { return values[0]; }
@@ -179,6 +183,9 @@ inline void test_generic_points()
 {
     Point<2, float> p1;
     Point<2, float> p2;
+
+    Point2D p2d {1, 2};
+    Point3D p3d {1, 2, 3};
     auto p3 = p1 + p2;
     p1 += p2;
     p1 *= 3.f;
