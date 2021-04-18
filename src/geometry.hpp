@@ -8,7 +8,7 @@
 #include <numeric>
 #include <string>
 
-template <typename Type, int dimension>
+template <int dimension, typename Type>
 class Point
 {
 public:
@@ -153,11 +153,27 @@ public:
 
 };
 
-using Point2D = Point<float, 2>;
-using Point3D = Point<float, 3>;
+using Point2D = Point<2, float>;
+using Point3D = Point<3, float>;
 
+template <int dimension, typename Type>
+std::ostream& operator<<(std::ostream& stream, Point<dimension, Type>& point)
+{
+    return stream << point.to_string();
+}
 
 inline Point2D project_2D(const Point3D& p)
 {
     return { .5f * p.x() - .5f * p.y(), .5f * p.x() + .5f * p.y() + p.z() };
+}
+
+inline void test_generic_points()
+{
+    Point<2, float> p1;
+    Point<2, float> p2;
+    auto p3 = p1 + p2;
+    p1 += p2;
+    p1 *= 3.f;
+
+    std::cout << p3 << std::endl;
 }
