@@ -16,6 +16,14 @@ public:
     
     Point() = default;
 
+    Point(float x, float y) :
+        values { x, y }
+    {}
+
+    Point(float x, float y, float z) :
+        values { x, y, z }
+    {}
+
     Type& x() { return values[0]; }
     Type x() const { return values[0]; }
 
