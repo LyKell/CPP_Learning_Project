@@ -21,7 +21,7 @@ bool AircraftManager::move()
         });
 
     aircrafts.erase(std::remove_if(aircrafts.begin(), aircrafts.end(),
-        [](std::unique_ptr<Aircraft>& a)
+        [this](std::unique_ptr<Aircraft>& a)
         {
             try 
             {
@@ -30,6 +30,7 @@ bool AircraftManager::move()
             catch (const AircraftCrash& err)
             {
                 std::cerr << err.what() << std::endl;
+                aircraft_crash++;
                 return true;
             }
         }), aircrafts.end());
@@ -63,4 +64,9 @@ int AircraftManager::get_required_fuel()
             }
             return sum;
         });
+}
+
+void AircraftManager::count_crash() const
+{
+    std::cout << aircraft_crash << " airplanes crashed into the ground" << std::endl;
 }

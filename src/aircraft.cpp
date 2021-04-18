@@ -144,7 +144,7 @@ bool Aircraft::move()
             if (fuel <= 0)
             {
                 using namespace std::string_literals;
-                throw AircraftCrash { flight_number + " is out of fuel"s };
+                throw AircraftCrash { flight_number + " is out of fuel and crashed into the ground"s };
             }
 
             // if we are in the air, but too slow, then we will sink!

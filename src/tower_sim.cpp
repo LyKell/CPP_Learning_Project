@@ -60,6 +60,8 @@ void TowerSimulation::create_keystrokes()
             std::cout << "Airline " << airlines[i] << ": " << aircraft_manager.count_aircraft_per_airline(airlines[i]) << std::endl;
         });
     }
+
+    GL::keystrokes.emplace('m', [this]() { aircraft_manager.count_crash(); });
 }
 
 void TowerSimulation::display_help() const
