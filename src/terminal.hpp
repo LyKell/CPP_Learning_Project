@@ -50,6 +50,7 @@ public:
 
     void refill_aircraft_if_needed(int& fuel_stock)
     {
+        assert(fuel_stock >= 0 && "fuel_stock must be positive or nul in Terminal::refill_aircraft_if_needed");
         if (in_use() && is_servicing() && current_aircraft->is_low_on_fuel())
         {
             current_aircraft->refill(fuel_stock);

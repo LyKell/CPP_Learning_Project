@@ -3,6 +3,7 @@
 #include "GL/opengl_interface.hpp"
 #include "aircraft_crash.hpp"
 
+#include <cassert>
 #include <cmath>
 
 void Aircraft::turn_to_waypoint()

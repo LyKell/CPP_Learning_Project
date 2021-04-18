@@ -4,11 +4,13 @@
 #include <memory>
 #include <random>
 
-bool AircraftFactory::is_flight_registered(std::string number) const {
+bool AircraftFactory::is_flight_registered(std::string& number) const
+{
     return registered_flights.find(number) != registered_flights.end();
 }
 
-std::string AircraftFactory::generate_random_unique_flight_number() {
+std::string AircraftFactory::generate_random_unique_flight_number()
+{
     std::string flight_number;
     do {
         flight_number = airlines[std::rand() % 8] + std::to_string(1000 + (rand() % 9000));
@@ -27,7 +29,8 @@ void AircraftFactory::init_aircraft_types()
 
 std::unique_ptr<Aircraft> AircraftFactory::create_aircraft(const AircraftType& type, Airport* airport)
 {
-    assert(airport);
+    assert(airport && "airport is null in AircraftFactory::create_aircraft");
+
     const std::string flight_number = generate_random_unique_flight_number();
     const float angle       = (rand() % 1000) * 2 * 3.141592f / 1000.f; // random angle between 0 and 2pi
     const Point3D start     = Point3D { std::sin(angle), std::cos(angle), 0 } * 3 + Point3D { 0, 0, 2 };
@@ -38,5 +41,7 @@ std::unique_ptr<Aircraft> AircraftFactory::create_aircraft(const AircraftType& t
 
 std::unique_ptr<Aircraft> AircraftFactory::create_random_aircraft(Airport* airport)
 {
+    assert(airport && "airport is null in AircraftFactory::create_random_aircraft");
+    
     return create_aircraft(*(aircraft_types[rand() % 3]), airport);
 }

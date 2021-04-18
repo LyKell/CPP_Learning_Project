@@ -2,6 +2,7 @@
 #include "aircraft_crash.hpp"
 
 #include <algorithm>
+#include <cassert>
 #include <iostream>
 #include <memory>
 #include <utility>
@@ -9,6 +10,7 @@
 
 void AircraftManager::add(std::unique_ptr<Aircraft> aircraft)
 {
+    assert((aircraft != nullptr) && "airport can't be nullptr in AircraftManager::add");
     aircrafts.emplace_back(std::move(aircraft));
 }
 
@@ -48,7 +50,7 @@ int AircraftManager::count_aircraft_per_airline(const std::string& airline) cons
         });
 }
 
-bool AircraftManager::compare_two_aircrafts(std::unique_ptr<Aircraft>& a1, std::unique_ptr<Aircraft>& a2)
+bool AircraftManager::compare_two_aircrafts(std::unique_ptr<Aircraft>& a1, std::unique_ptr<Aircraft>& a2) const
 {
     return std::make_tuple(!a1->has_terminal(), a1->get_fuel())
         < std::make_tuple(!a2->has_terminal(), a2->get_fuel());

@@ -66,7 +66,9 @@ public:
         terminals { type.create_terminals() },
         tower { *this },
         manager { aircraft_manager }
-    {}
+    {
+        assert(image && "image is null in Airport::Airport");
+    }
 
     Tower& get_tower() { return tower; }
 

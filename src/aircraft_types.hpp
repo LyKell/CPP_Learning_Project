@@ -5,6 +5,7 @@
 #include "img/media_path.hpp"
 
 #include <array>
+#include <cassert>
 
 struct AircraftType
 {
@@ -19,5 +20,9 @@ struct AircraftType
         max_air_speed { max_air_speed_ },
         max_accel { max_accel_ },
         texture { new img::Image { sprite.get_full_path() }, num_tiles }
-    {}
+    {
+        assert(max_ground_speed_ >= 0.f && "max_ground_speed_ must be positive in AircraftType::AircraftType");
+        assert(max_air_speed_ >= 0.f && "max_air_speed_ must be positive in AircraftType::AircraftType");
+        assert(max_accel_ >= 0.f && "max_accel_ must be positive in AircraftType::AircraftType");
+    }
 };

@@ -14,7 +14,7 @@ class AircraftFactory
 private:
     std::unordered_set<std::string> registered_flights;
 
-    bool is_flight_registered(std::string) const;
+    bool is_flight_registered(std::string&) const;
     std::string generate_random_unique_flight_number();
 
 public:
